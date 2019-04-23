@@ -13,9 +13,9 @@ class Chess:
         self.place_piece()
 
     def place_piece(self):
-        for x in range(len(self._field)):
-            for y in range(len(self._field)):
-                if x == 0 or x == 1 or x == 6 or x == 7:
+        for y in range(len(self._field)):
+            for x in range(len(self._field)):
+                if y == 0 or y == 1 or y == 6 or y == 7:
                     self._field[x][y] = Pawn(Color.WHITE)
 
 
