@@ -1,9 +1,14 @@
 from Chess import *
+from Draw import *
+
+game = Chess()
+draw_field(game._field)
 
 
-def main():
-    game = Chess()
 
 
-if __name__ == '__main__':
-    main()
+
+
+
+
+
