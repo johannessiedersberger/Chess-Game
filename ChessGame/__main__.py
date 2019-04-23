@@ -7,8 +7,3 @@ draw_field(game._field)
 
 
 
-
-
-
-
-

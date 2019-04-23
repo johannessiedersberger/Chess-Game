@@ -15,13 +15,15 @@ class Chess:
     def place_piece(self):
         for y in range(len(self._field)):
             for x in range(len(self._field)):
-                if y == 0 or y == 1 or y == 6 or y == 7:
+                if y == 0 or y == 1:
                     self._field[x][y] = Pawn(Color.WHITE)
+                if y == 6 or y == 7:
+                    self._field[x][y] = Pawn(Color.BLACK)
 
 
 class Pawn:
     def __init__(self, color: Color):
-        self.__player = color
+        self._color = color
 
 
         
