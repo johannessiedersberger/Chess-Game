@@ -41,16 +41,16 @@ class Piece:
         return self._game_board[x][y] != 0 and self._game_board[x][y]._color == self._color
 
     def in_board(self, x, y):
-        return 0 >= x < 8 and 0 >= y < 8
+        return 0 <= x < 8 and 0 <= y < 8
 
 
 class Pawn(Piece):
 
     def available_moves(self, x, y):
         moves = []
-        moves.append((x, y+self.get_direction()))
-        moves.append((x+1, y + self.get_direction()))
-        moves.append((x-1, y + self.get_direction()))
+        if self.valid_turn(x, y+self.get_direction()): moves.append((x, y+self.get_direction()))
+        if self.valid_turn(x+1, y+self.get_direction()): moves.append((x+1, y + self.get_direction()))
+        if self.valid_turn(x-1, y+self.get_direction()): moves.append((x-1, y + self.get_direction()))
         return moves
 
     def get_direction(self):
