@@ -19,7 +19,6 @@ def draw_field(game: Chess):
 
 
 def show_moves(game: Chess, x, y):
-
         field = game._field
         moves = field[x][y].available_moves(x,y)
         print(moves)
@@ -40,6 +39,7 @@ def show_moves(game: Chess, x, y):
                     elif field[x][y] == 0:
                         print(colored(empty_field, 'red'), end='')
             print()
+        print()
 
 
 

@@ -24,6 +24,11 @@ class Chess:
                     self._field[x][y] = Pawn(Color.WHITE, self._field)
 
 
+    def move(self, x_start,y_start,x_dest,y_dest):
+        figure_to_move = self._field[x_start][y_start]
+        self._field[x_start][y_start] = 0
+        self._field[x_dest][y_dest] = figure_to_move
+
 class Piece:
     def __init__(self,color: Color, game_board: list):
         if game_board is None or color is None:
@@ -42,6 +47,8 @@ class Piece:
 
     def in_board(self, x, y):
         return 0 <= x < 8 and 0 <= y < 8
+
+
 
 
 class Pawn(Piece):
