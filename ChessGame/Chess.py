@@ -13,18 +13,50 @@ class Chess:
         self.place_piece()
 
     def place_piece(self):
+        self.place_pawns()
+
+    def place_pawns(self):
         for y in range(len(self._field)):
             for x in range(len(self._field)):
                 if y == 0 or y == 1:
-                    self._field[x][y] = Pawn(Color.WHITE)
+                    self._field[x][y] = Pawn(Color.BLACK, self._field)
                 if y == 6 or y == 7:
-                    self._field[x][y] = Pawn(Color.BLACK)
+                    self._field[x][y] = Pawn(Color.WHITE, self._field)
 
 
-class Pawn:
-    def __init__(self, color: Color):
+class Piece:
+    def __init__(self,color: Color, game_board: list):
+        if game_board is None or color is None:
+            raise ValueError
+        self._game_board = game_board
         self._color = color
 
+    def available_moves(self, x, y):
+        print('Not available in base class')
 
-        
+    def valid_turn(self, x, y):
+        return self.in_board(x, y) and self.same_color(x, y) is False
+
+    def same_color(self, x, y):
+        return self._game_board[x][y] != 0 and self._game_board[x][y]._color == self._color
+
+    def in_board(self, x, y):
+        return 0 >= x < 8 and 0 >= y < 8
+
+
+class Pawn(Piece):
+
+    def available_moves(self, x, y):
+        moves = []
+        moves.append((x, y+self.get_direction()))
+        moves.append((x+1, y + self.get_direction()))
+        moves.append((x-1, y + self.get_direction()))
+        return moves
+
+    def get_direction(self):
+        if self._color == Color.WHITE:
+            return -1
+        else:  # black
+            return 1
+
 
