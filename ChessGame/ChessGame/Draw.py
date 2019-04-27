@@ -8,10 +8,10 @@ def draw_field(game: Chess):
         for x in range(0, 8):
             if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
                 print(white_pieces[Pawn], end='')
-                #print((x, y), end='')
+ 
             elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
                 print(black_pieces[Pawn], end='')
-                #print((x, y))
+    
             elif field[x][y] == 0:
                 print(colored(empty_field, 'yellow'), end='')
         print()
@@ -48,8 +48,8 @@ def show_moves(game: Chess, x, y):
 
 
 
-empty_field = 'ðŸˆ´'
+empty_field = '♋'
 
-white_pieces = {Pawn: 'â™™'}
-black_pieces = {Pawn: 'â™Ÿ'}
+white_pieces = {Pawn: '♙'}
+black_pieces = {Pawn: '♟'}
 
