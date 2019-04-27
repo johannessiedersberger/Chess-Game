@@ -7,7 +7,6 @@ class Color(Enum):
 
 
 class Chess:
-
     def __init__(self):
         self._field = [[0 for x in range(8)] for y in range(8)]
         self.place_piece()
@@ -30,7 +29,7 @@ class Chess:
         self._field[x_dest][y_dest] = figure_to_move
 
 class Piece:
-    def __init__(self,color: Color, game_board: list):
+    def __init__(self, color: Color, game_board: list):
         if game_board is None or color is None:
             raise ValueError
         self._game_board = game_board
@@ -65,5 +64,6 @@ class Pawn(Piece):
             return -1
         else:  # black
             return 1
+
 
 

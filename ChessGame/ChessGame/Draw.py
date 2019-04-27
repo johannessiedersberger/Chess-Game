@@ -48,7 +48,8 @@ def show_moves(game: Chess, x, y):
 
 
 
-empty_field = '🈴'
+empty_field = 'ðŸˆ´'
 
-white_pieces = {Pawn: '♙'}
-black_pieces = {Pawn: '♟'}
+white_pieces = {Pawn: 'â™™'}
+black_pieces = {Pawn: 'â™Ÿ'}
+
