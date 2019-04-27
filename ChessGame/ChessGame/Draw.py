@@ -4,8 +4,10 @@ from termcolor import colored
 
 def draw_field(game: Chess):
     field = game._field
+    print(" 0.1.2.3.4.5.6.7")
     for y in range(0, 8):
-        for x in range(0, 8):
+        print(y,end='')
+        for x in range(0, 8):         
             if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
                 print(white_pieces[Pawn], end='')
  
