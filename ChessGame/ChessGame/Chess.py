@@ -19,9 +19,9 @@ class Chess:
         for y in range(len(self._field)):
             for x in range(len(self._field)):
                 if y == 0 or y == 1:
-                    self._field[x][y] = Pawn(Color.BLACK, self._field)
+                    self._field[x][y] = Pawn(Color.BLACK, self)
                 if y == 6 or y == 7:
-                    self._field[x][y] = Pawn(Color.WHITE, self._field)
+                    self._field[x][y] = Pawn(Color.WHITE, self)
 
 
     def move(self, x_start,y_start,x_dest,y_dest):
@@ -42,13 +42,15 @@ class Chess:
     def in_board(self, x, y):
         return 0 <= x < 8 and 0 <= y < 8
 
+    def is_field_empty(self, x ,y):
+      return self._field[x][y] == 0
     
 
 class Piece:
-    def __init__(self,color: Color, game_board: list):
-        if game_board is None or color is None:
+    def __init__(self,color: Color, game: Chess):
+        if game is None or color is None:
             raise ValueError
-        self._game_board = game_board
+        self._game = game
         self._color = color
 
     def available_moves(self, x, y):
@@ -57,11 +59,13 @@ class Piece:
     def valid_turn(self, x_dest, y_dest):
         return self.in_board(x_dest, y_dest) and self.same_color(x_dest, y_dest) is False
 
-    def same_color(self, x_dest, y_dest):
-        return self._game_board[x_dest][y_dest] != 0 and self._game_board[x_dest][y_dest]._color == self._color
-
     def in_board(self, x, y):
         return 0 <= x < 8 and 0 <= y < 8
+
+    def same_color(self, x_dest, y_dest):
+        return self._game._field[x_dest][y_dest] != 0 and self._game._field[x_dest][y_dest]._color == self._color
+
+    
 
 
 
@@ -70,9 +74,10 @@ class Pawn(Piece):
 
     def available_moves(self, x, y):
         moves = []
-        if self.valid_turn(x, y+self.get_direction()): moves.append((x, y+self.get_direction()))
-        if self.valid_turn(x+1, y+self.get_direction()): moves.append((x+1, y + self.get_direction()))
-        if self.valid_turn(x-1, y+self.get_direction()): moves.append((x-1, y + self.get_direction()))
+        if self.valid_turn(x, y+self.get_direction()*2) : moves.append((x, y+self.get_direction()*2))
+        if self.valid_turn(x, y+self.get_direction()) : moves.append((x, y+self.get_direction()))
+        if self.valid_turn(x+1, y+self.get_direction()) : moves.append((x+1, y + self.get_direction()))
+        if self.valid_turn(x-1, y+self.get_direction()) : moves.append((x-1, y + self.get_direction()))
         return moves
 
     def get_direction(self):
