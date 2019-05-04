@@ -36,14 +36,14 @@ def show_moves(game: Chess, x, y):
                     if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
                         print(colored(white_pieces[Pawn], 'blue'), end='')
                     elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
-                        print(colored(white_pieces[Pawn], 'blue'), end='')
+                        print(colored(black_pieces[Pawn], 'blue'), end='')
                     elif field[x][y] == 0:
                         print(colored(empty_field, 'blue'), end='')
                 else:
                     if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
                         print(white_pieces[Pawn], end='')
                     elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
-                        print(white_pieces[Pawn], end='')
+                        print(black_pieces[Pawn], end='')
                     elif field[x][y] == 0:
                         print(colored(empty_field, 'yellow'), end='')
             print()

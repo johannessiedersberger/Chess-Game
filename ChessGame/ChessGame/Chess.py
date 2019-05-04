@@ -62,13 +62,16 @@ class Piece:
         print('Not available in base class')
 
     def valid_turn(self, x_start, y_start, x_dest, y_dest):
-        return self.in_board(x_dest, y_dest) and self.same_color(x_dest, y_dest) is False and self.piece_in_way(x_start, y_start, x_dest, y_dest) is False
+        var =  self.in_board(x_dest, y_dest) and self.same_color(x_dest, y_dest) is False and self.piece_in_way(x_start, y_start, x_dest, y_dest) is False
+        return var
 
     def in_board(self, x, y):
-        return 0 <= x < 8 and 0 <= y < 8
+        var =  0 <= x < 8 and 0 <= y < 8
+        return var
 
     def same_color(self, x_dest, y_dest):
-        return self._game._field[x_dest][y_dest] != 0 and self._game._field[x_dest][y_dest]._color == self._color
+        var= self._game._field[x_dest][y_dest] != 0 and self._game._field[x_dest][y_dest]._color == self._color
+        return var
 
     def get_field_state(self, x, y):
       if self._game._field[x][y] == 0:
@@ -78,16 +81,16 @@ class Piece:
       else:
         return FieldState.BLACK_PIECE
 
-    def enemy_color(self):
+    def get_enemy_state(self):
       if self._color == Color.WHITE:
-        return Color.BLACK
+        return FieldState.BLACK_PIECE
       else:
-        return Color.WHITE
+        return FieldState.WHITE_PIECE
 
     def piece_in_way(self, x_start, y_start, x_dest, y_dest):
       way = self.straight_way(x_start, y_start, x_dest, y_dest)
       for piece in range(1, len(way)):
-        if way[piece] != 0:
+        if way[piece] != 0 and piece != len(way)-1:
           return True
       return False
 
@@ -109,8 +112,8 @@ class Pawn(Piece):
         moves = []
         if self.valid_turn(x, y, x, y+self.get_direction()*2) : moves.append((x, y + self.get_direction()*2))
         if self.valid_turn(x, y, x, y+self.get_direction()) : moves.append((x, y + self.get_direction()))
-        if self.valid_turn(x, y, x+1, y+self.get_direction()) and self.get_field_state(x+1, y+self.get_direction()) is self.enemy_color() : moves.append((x+1, y + self.get_direction()))
-        if self.valid_turn(x, y, x-1, y+self.get_direction()) and self.get_field_state(x-1, y+self.get_direction()) is self.enemy_color() : moves.append((x-1, y + self.get_direction()))
+        if self.valid_turn(x, y, x+1, y+self.get_direction()) and self.get_field_state(x+1, y+self.get_direction()) == self.get_enemy_state() : moves.append((x+1, y + self.get_direction()))
+        if self.valid_turn(x, y, x-1, y+self.get_direction()) and self.get_field_state(x-1, y+self.get_direction()) == self.get_enemy_state() : moves.append((x-1, y + self.get_direction()))
         return moves
 
     def get_direction(self):
