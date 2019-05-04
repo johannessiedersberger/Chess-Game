@@ -68,9 +68,9 @@ class Piece:
     def piece_in_way(self, x_start, y_start, x_dest, y_dest):
       way = self.strait_way(x_start, y_start, x_dest, y_dest)
       for piece in range(1, len(way)):
-        if piece != 0:
-          return False
-      return True
+        if way[piece] != 0:
+          return True
+      return False
 
     def strait_way(self, x_start, y_start, x_dest, y_dest):
       way = []
@@ -80,7 +80,7 @@ class Piece:
       elif y_start == y_dest:
         for x in range(x_start, x_dest+1):
           way.append(self._game._field[x][y_start])
-
+      return way
           
 
     

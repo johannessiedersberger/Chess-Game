@@ -4,7 +4,7 @@ from Draw import *
 game = Chess()
 draw_field(game)
 
-moves = game._field[1][1].available_moves(1,1)
+moves = game._field[0][0].available_moves(0,0)
 
 
 show_moves(game,0,0)
