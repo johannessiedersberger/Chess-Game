@@ -5,6 +5,11 @@ class Color(Enum):
     WHITE = 0
     BLACK = 1
 
+class FieldState(Enum):
+    WHITE_PIECE = 0
+    BLACK_PIECE = 1
+    EMTPTY = 2
+
 
 class Chess:
 
@@ -65,14 +70,28 @@ class Piece:
     def same_color(self, x_dest, y_dest):
         return self._game._field[x_dest][y_dest] != 0 and self._game._field[x_dest][y_dest]._color == self._color
 
+    def get_field_state(self, x, y):
+      if self._game._field[x][y] == 0:
+        return FieldState.EMTPTY
+      elif self._game._field[x][y]._color == Color.WHITE:
+        return FieldState.WHITE_PIECE
+      else:
+        return FieldState.BLACK_PIECE
+
+    def enemy_color(self):
+      if self._color == Color.WHITE:
+        return Color.BLACK
+      else:
+        return Color.WHITE
+
     def piece_in_way(self, x_start, y_start, x_dest, y_dest):
-      way = self.strait_way(x_start, y_start, x_dest, y_dest)
+      way = self.straight_way(x_start, y_start, x_dest, y_dest)
       for piece in range(1, len(way)):
         if way[piece] != 0:
           return True
       return False
 
-    def strait_way(self, x_start, y_start, x_dest, y_dest):
+    def straight_way(self, x_start, y_start, x_dest, y_dest):
       way = []
       if x_start == x_dest:
         for y in range(y_start, y_dest+1):
@@ -90,8 +109,8 @@ class Pawn(Piece):
         moves = []
         if self.valid_turn(x, y, x, y+self.get_direction()*2) : moves.append((x, y + self.get_direction()*2))
         if self.valid_turn(x, y, x, y+self.get_direction()) : moves.append((x, y + self.get_direction()))
-        if self.valid_turn(x, y, x+1, y+self.get_direction()) : moves.append((x+1, y + self.get_direction()))
-        if self.valid_turn(x, y, x-1, y+self.get_direction()) : moves.append((x-1, y + self.get_direction()))
+        if self.valid_turn(x, y, x+1, y+self.get_direction()) and self.get_field_state(x+1, y+self.get_direction()) is self.enemy_color() : moves.append((x+1, y + self.get_direction()))
+        if self.valid_turn(x, y, x-1, y+self.get_direction()) and self.get_field_state(x-1, y+self.get_direction()) is self.enemy_color() : moves.append((x-1, y + self.get_direction()))
         return moves
 
     def get_direction(self):
