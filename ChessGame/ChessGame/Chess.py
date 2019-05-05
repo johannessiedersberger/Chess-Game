@@ -38,6 +38,8 @@ class Chess:
           raise ValueError('Start Field Empty')       
         if self._field[x_start][y_start].same_color(x_dest,y_dest):
           raise ValueError('Same Color')
+        if (x_dest,y_dest) not in self._field[x_start][y_start].available_moves(x_start, y_start):
+          raise ValueError('Not an available move')
         
             
         figure_to_move = self._field[x_start][y_start]
