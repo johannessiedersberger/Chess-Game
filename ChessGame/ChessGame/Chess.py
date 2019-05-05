@@ -117,7 +117,7 @@ class Pawn(Piece):
 
     def available_moves(self, x, y):
         moves = []
-        if self.valid_turn(x, y, x, y+self.get_direction()*2) : moves.append((x, y + self.get_direction()*2))
+        if self.valid_turn(x, y, x, y+self.get_direction()*2) and self.first_turn(x,y) : moves.append((x, y + self.get_direction()*2))
         if self.valid_turn(x, y, x, y+self.get_direction()) and self.field_empty(x, y+self.get_direction()) : moves.append((x, y + self.get_direction()))
         if self.valid_turn(x, y, x+1, y+self.get_direction()) and self.get_field_state(x+1, y+self.get_direction()) == self.get_enemy_state() : moves.append((x+1, y + self.get_direction()))
         if self.valid_turn(x, y, x-1, y+self.get_direction()) and self.get_field_state(x-1, y+self.get_direction()) == self.get_enemy_state() : moves.append((x-1, y + self.get_direction()))
@@ -128,3 +128,8 @@ class Pawn(Piece):
             return -1
         else:  # black
             return 1
+    def first_turn(self, x_start, y_start):
+      if y_start == 1 or y_start == 6:
+        return True
+      else:
+        return False
