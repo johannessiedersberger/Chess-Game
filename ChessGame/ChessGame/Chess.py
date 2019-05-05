@@ -97,13 +97,20 @@ class Piece:
     def straight_way(self, x_start, y_start, x_dest, y_dest):
       way = []
       if x_start == x_dest:
-        for y in range(y_start, y_dest+1):
+        min_y = min(y_start, y_dest)
+        max_y = max(y_start, y_dest)
+        for y in range(min_y, max_y+1):
           way.append(self._game._field[x_start][y])
       elif y_start == y_dest:
-        for x in range(x_start, x_dest+1):
+        min_x = min(x_start, x_dest)
+        max_x = max(x_start, x_dest)
+        for x in range(min_x, max_x+1):
           way.append(self._game._field[x][y_start])
       return way
           
+    def field_empty(self, x, y):
+      return self._game._field[x][y] == 0
+
 
     
 class Pawn(Piece):
@@ -111,7 +118,7 @@ class Pawn(Piece):
     def available_moves(self, x, y):
         moves = []
         if self.valid_turn(x, y, x, y+self.get_direction()*2) : moves.append((x, y + self.get_direction()*2))
-        if self.valid_turn(x, y, x, y+self.get_direction()) : moves.append((x, y + self.get_direction()))
+        if self.valid_turn(x, y, x, y+self.get_direction()) and self.field_empty(x, y+self.get_direction()) : moves.append((x, y + self.get_direction()))
         if self.valid_turn(x, y, x+1, y+self.get_direction()) and self.get_field_state(x+1, y+self.get_direction()) == self.get_enemy_state() : moves.append((x+1, y + self.get_direction()))
         if self.valid_turn(x, y, x-1, y+self.get_direction()) and self.get_field_state(x-1, y+self.get_direction()) == self.get_enemy_state() : moves.append((x-1, y + self.get_direction()))
         return moves

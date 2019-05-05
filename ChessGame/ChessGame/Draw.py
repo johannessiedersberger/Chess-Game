@@ -50,12 +50,6 @@ def show_moves(game: Chess, x, y):
         print()
 
 
-
-
-
-
-
-
 empty_field = '♋'
 
 white_pieces = {Pawn: '♙'}
