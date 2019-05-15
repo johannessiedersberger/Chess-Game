@@ -64,7 +64,7 @@ class Piece:
         print('Not available in base class')
 
     def valid_turn(self, x_start, y_start, x_dest, y_dest):
-        var =  self.in_board(x_dest, y_dest) and self.same_color(x_dest, y_dest) is False and self.piece_in_way(x_start, y_start, x_dest, y_dest) is False
+        var =  self.in_board(x_dest, y_dest) and self.same_color(x_dest, y_dest) is False 
         return var
 
     def in_board(self, x, y):
@@ -88,33 +88,28 @@ class Piece:
         return FieldState.BLACK_PIECE
       else:
         return FieldState.WHITE_PIECE
-
-    def piece_in_way(self, x_start, y_start, x_dest, y_dest):
-      way = self.straight_way(x_start, y_start, x_dest, y_dest)
-      for piece in range(1, len(way)):
-        if way[piece] != 0 and piece != len(way)-1:
-          return True
-      return False
-
-    def straight_way(self, x_start, y_start, x_dest, y_dest):
-      way = []
-      if x_start == x_dest:
-        min_y = min(y_start, y_dest)
-        max_y = max(y_start, y_dest)
-        for y in range(min_y, max_y+1):
-          way.append(self._game._field[x_start][y])
-      elif y_start == y_dest:
-        min_x = min(x_start, x_dest)
-        max_x = max(x_start, x_dest)
-        for x in range(min_x, max_x+1):
-          way.append(self._game._field[x][y_start])
-      return way
           
     def field_empty(self, x, y):
       return self._game._field[x][y] == 0
 
     straigt_directions = [(1,0), (0,1), (-1,0), (0,-1)]
     diagonal_directions = [(1,1), (-1,1), (1,-1), (-1,-1)]
+
+    def get_way(self, x_pos, y_pos, directions):
+      way = []
+      for x_dir, y_dir in directions:
+        x_temp,y_temp = x_pos + x_dir, y_pos + y_dir
+        while self.in_board(x_temp, y_temp):
+          target = self._game._field[x_temp][y_temp]
+
+          if target is 0: way.append((x_temp, y_temp))
+          elif target._color != self._color:
+            way.append((x_temp, y_temp))
+            break
+          else:
+            break
+        x_temp,y_temp = x_temp + x_dir, y_temp + y_dir
+
     
 class Pawn(Piece):
 
@@ -140,6 +135,6 @@ class Pawn(Piece):
 class Rook(Piece):
 
   def available_moves(self, x, y):
-    moves = []
+    moves = self.get_way(self, x,y,self.straigt_directions)
     
     
