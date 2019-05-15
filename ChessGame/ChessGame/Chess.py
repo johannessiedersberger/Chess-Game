@@ -113,7 +113,8 @@ class Piece:
     def field_empty(self, x, y):
       return self._game._field[x][y] == 0
 
-
+    straigt_directions = [(1,0), (0,1), (-1,0), (0,-1)]
+    diagonal_directions = [(1,1), (-1,1), (1,-1), (-1,-1)]
     
 class Pawn(Piece):
 
@@ -128,10 +129,17 @@ class Pawn(Piece):
     def get_direction(self):
         if self._color == Color.WHITE:
             return -1
-        else:  # black
+        else:  
             return 1
     def first_turn(self, x_start, y_start):
       if y_start == 1 or y_start == 6:
         return True
       else:
         return False
+
+class Rook(Piece):
+
+  def available_moves(self, x, y):
+    moves = []
+    
+    
