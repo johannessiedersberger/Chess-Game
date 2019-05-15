@@ -7,12 +7,19 @@ def draw_field(game: Chess):
     print(" 0.1.2.3.4.5.6.7")
     for y in range(0, 8):
         print(y,end='')
-        for x in range(0, 8):         
+        for x in range(0, 8):    
+            #pawns
             if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
                 print(white_pieces[Pawn], end='')
  
             elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
                 print(black_pieces[Pawn], end='')
+            #rooks
+            if isinstance(field[x][y], Rook) and field[x][y]._color == Color.WHITE:
+                print(white_pieces[Rook], end='')
+ 
+            elif isinstance(field[x][y], Rook) and field[x][y]._color == Color.BLACK:
+                print(black_pieces[Rook], end='')
     
             elif field[x][y] == 0:
                 print(colored(empty_field, 'yellow'), end='')
@@ -52,6 +59,6 @@ def show_moves(game: Chess, x, y):
 
 empty_field = '♋'
 
-white_pieces = {Pawn: '♙'}
-black_pieces = {Pawn: '♟'}
+white_pieces = {Pawn: '♙',  Rook : '♖'}
+black_pieces = {Pawn: '♟',  Rook : '♜'}
 

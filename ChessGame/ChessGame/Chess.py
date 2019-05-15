@@ -16,6 +16,7 @@ class Chess:
     def __init__(self):
         self._field = [[0 for x in range(8)] for y in range(8)]
         self._place_piece()
+        self._place_rooks()
 
     def _place_piece(self):
         self._place_pawns()
@@ -27,6 +28,14 @@ class Chess:
                     self._field[x][y] = Pawn(Color.BLACK, self)
                 if y == 6 or y == 7:
                     self._field[x][y] = Pawn(Color.WHITE, self)
+
+    def _place_rooks(self):
+      for y in range(len(self._field)):
+            for x in range(len(self._field)):
+              if y == 0 and (x == 0 or x == 7):
+                self._field[x][y] = Rook(Color.BLACK, self)
+              if y == 7 and (x == 0 or x == 7):
+                self._field[x][y] = Rook(Color.WHITE, self)
 
 
     def move(self, x_start,y_start,x_dest,y_dest):
