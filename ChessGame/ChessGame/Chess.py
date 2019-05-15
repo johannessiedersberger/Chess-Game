@@ -117,7 +117,9 @@ class Piece:
             break
           else:
             break
-        x_temp,y_temp = x_temp + x_dir, y_temp + y_dir
+          x_temp,y_temp = x_temp + x_dir, y_temp + y_dir
+
+      return way
 
     
 class Pawn(Piece):
@@ -144,6 +146,7 @@ class Pawn(Piece):
 class Rook(Piece):
 
   def available_moves(self, x, y):
-    moves = self.get_way(self, x,y,self.straigt_directions)
+    moves = self.get_way(x,y,self.straigt_directions)
+    return moves
     
     
