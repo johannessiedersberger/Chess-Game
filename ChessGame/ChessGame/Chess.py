@@ -16,10 +16,12 @@ class Chess:
     def __init__(self):
         self._field = [[0 for x in range(8)] for y in range(8)]
         self._place_piece()
-        self._place_rooks()
+        
 
     def _place_piece(self):
         self._place_pawns()
+        self._place_rooks()
+        self._place_queens()
 
     def _place_pawns(self):
         for y in range(len(self._field)):
@@ -36,6 +38,14 @@ class Chess:
                 self._field[x][y] = Rook(Color.BLACK, self)
               if y == 7 and (x == 0 or x == 7):
                 self._field[x][y] = Rook(Color.WHITE, self)
+
+    def _place_queens(self):
+      for y in range(len(self._field)):
+            for x in range(len(self._field)):
+              if y == 0 and x == 3:
+                self._field[x][y] = Queen(Color.BLACK, self)
+              if y == 7 and x == 3:
+                self._field[x][y] = Queen(Color.WHITE, self)
 
 
     def move(self, x_start,y_start,x_dest,y_dest):
@@ -147,6 +157,11 @@ class Rook(Piece):
 
   def available_moves(self, x, y):
     moves = self.get_way(x,y,self.straigt_directions)
+    return moves
+
+class Queen(Piece):
+  def available_moves(self, x, y):
+    moves = self.get_way(x,y,self.straigt_directions+self.diagonal_directions)
     return moves
     
     

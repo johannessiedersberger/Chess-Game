@@ -20,9 +20,17 @@ def draw_field(game: Chess):
  
             elif isinstance(field[x][y], Rook) and field[x][y]._color == Color.BLACK:
                 print(black_pieces[Rook], end='')
-    
+            #queens
+            if isinstance(field[x][y], Queen) and field[x][y]._color == Color.WHITE:
+                print(white_pieces[Queen], end='')
+ 
+            elif isinstance(field[x][y], Queen) and field[x][y]._color == Color.BLACK:
+                print(black_pieces[Queen], end='')
+
             elif field[x][y] == 0:
                 print(colored(empty_field, 'yellow'), end='')
+           
+
         print()
     print()
 
@@ -59,6 +67,6 @@ def show_moves(game: Chess, x, y):
 
 empty_field = '♋'
 
-white_pieces = {Pawn: '♙',  Rook : '♖'}
-black_pieces = {Pawn: '♟',  Rook : '♜'}
+white_pieces = {Pawn: '♙',  Rook : '♖', Queen: '♕'}
+black_pieces = {Pawn: '♟',  Rook : '♜', Queen: '♛'}
 
