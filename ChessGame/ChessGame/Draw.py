@@ -29,14 +29,14 @@ def show_moves(game: Chess, x, y):
         for y in range(0, 8):
             print(y,end='')
             for x in range(0, 8):
-                if((x,y) in moves):
+                if((x,y) in moves): # available moves (blue)
                     if field[x][y] == 0:
                         print(colored(empty_field, 'blue'), end='')
                     elif field[x][y]._color == Color.WHITE:
                       print(colored(white_pieces[type(field[x][y])], 'blue' ), end='')   
                     elif field[x][y]._color == Color.BLACK:
                       print(colored(black_pieces[type(field[x][y])], 'blue' ), end='')    
-                else:
+                else: # not available moves
                     if field[x][y] == 0:
                       print(colored(empty_field, 'yellow'), end='')            
                     elif field[x][y]._color == Color.WHITE:

@@ -22,6 +22,7 @@ class Chess:
         self._place_pawns()
         self._place_rooks()
         self._place_queens()
+        
 
     def _place_pawns(self):
         for y in range(len(self._field)):
@@ -163,5 +164,11 @@ class Queen(Piece):
   def available_moves(self, x, y):
     moves = self.get_way(x,y,self.straigt_directions+self.diagonal_directions)
     return moves
+
+class King(Piece):
+    def availableMoves(self,x_start,y_start,gameboard, Color = None):
+      return [(x_dest,y_dest) for x_dest,y_dest in kingList(x_start,y_start) if self.valid_turn(x_start,y_start,x_dest,y_dest)]
+    def kingList(x,y):
+      return [(x+1,y),(x+1,y+1),(x+1,y-1),(x,y+1),(x,y-1),(x-1,y),(x-1,y+1),(x-1,y-1)]
     
     
