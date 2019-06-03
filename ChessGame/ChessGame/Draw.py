@@ -8,33 +8,15 @@ def draw_field(game: Chess):
     for y in range(0, 8):
         print(y,end='')
         for x in range(0, 8):    
-            #pawns
-            if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
-                print(white_pieces[Pawn], end='')
- 
-            elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
-                print(black_pieces[Pawn], end='')
-            #rooks
-            if isinstance(field[x][y], Rook) and field[x][y]._color == Color.WHITE:
-                print(white_pieces[Rook], end='')
- 
-            elif isinstance(field[x][y], Rook) and field[x][y]._color == Color.BLACK:
-                print(black_pieces[Rook], end='')
-            #queens
-            if isinstance(field[x][y], Queen) and field[x][y]._color == Color.WHITE:
-                print(white_pieces[Queen], end='')
- 
-            elif isinstance(field[x][y], Queen) and field[x][y]._color == Color.BLACK:
-                print(black_pieces[Queen], end='')
-
-            elif field[x][y] == 0:
-                print(colored(empty_field, 'yellow'), end='')
-           
-
+            if field[x][y] == 0:
+                print(colored(empty_field, 'yellow'), end='')            
+            elif field[x][y]._color == Color.WHITE:
+              print(white_pieces[type(field[x][y])], end='')   
+            elif field[x][y]._color == Color.BLACK:
+              print(black_pieces[type(field[x][y])], end='')   
         print()
     print()
-
-
+     
 def show_moves(game: Chess, x, y):
         if game.is_field_empty(x,y):
           raise ValueError('Coordinate is 0, so no moves')
@@ -66,6 +48,7 @@ def show_moves(game: Chess, x, y):
 
 
 empty_field = '♋'
+
 
 white_pieces = {Pawn: '♙',  Rook : '♖', Queen: '♕'}
 black_pieces = {Pawn: '♟',  Rook : '♜', Queen: '♛'}
