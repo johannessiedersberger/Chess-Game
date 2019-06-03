@@ -30,19 +30,19 @@ def show_moves(game: Chess, x, y):
             print(y,end='')
             for x in range(0, 8):
                 if((x,y) in moves):
-                    if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
-                        print(colored(white_pieces[Pawn], 'blue'), end='')
-                    elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
-                        print(colored(black_pieces[Pawn], 'blue'), end='')
-                    elif field[x][y] == 0:
+                    if field[x][y] == 0:
                         print(colored(empty_field, 'blue'), end='')
+                    elif field[x][y]._color == Color.WHITE:
+                      print(colored(white_pieces[type(field[x][y])], 'blue' ), end='')   
+                    elif field[x][y]._color == Color.BLACK:
+                      print(colored(black_pieces[type(field[x][y])], 'blue' ), end='')    
                 else:
-                    if isinstance(field[x][y], Pawn) and field[x][y]._color == Color.WHITE:
-                        print(white_pieces[Pawn], end='')
-                    elif isinstance(field[x][y], Pawn) and field[x][y]._color == Color.BLACK:
-                        print(black_pieces[Pawn], end='')
-                    elif field[x][y] == 0:
-                        print(colored(empty_field, 'yellow'), end='')
+                    if field[x][y] == 0:
+                      print(colored(empty_field, 'yellow'), end='')            
+                    elif field[x][y]._color == Color.WHITE:
+                      print(white_pieces[type(field[x][y])], end='')   
+                    elif field[x][y]._color == Color.BLACK:
+                      print(black_pieces[type(field[x][y])], end='')                    
             print()
         print()
 
