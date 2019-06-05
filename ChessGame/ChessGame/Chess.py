@@ -19,18 +19,9 @@ class Chess:
         
 
     def _place_piece(self):
-        self._place_pawns()
-        self._place_rooks()
-        self._place_queens()
-        
-
-    def _place_pawns(self):
-        for y in range(len(self._field)):
-            for x in range(len(self._field)):
-                if y == 0 or y == 1:
-                    self._field[x][y] = Pawn(Color.BLACK, self)
-                if y == 6 or y == 7:
-                    self._field[x][y] = Pawn(Color.WHITE, self)
+        for i in range(0,8):
+            self._field[i][1] = Pawn(Color.WHITE, self)
+            self._field[i][6] = Pawn(Color.WHITE, self)
 
     def _place_rooks(self):
       for y in range(len(self._field)):
