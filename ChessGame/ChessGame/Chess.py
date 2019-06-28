@@ -34,6 +34,7 @@ class Chess():
             self._field[i][7] = placers[i](Color.WHITE, self)
       
     def move(self, x_start,y_start,x_dest,y_dest):
+        #check for errors
         if self.in_board(x_dest, y_dest) is False:
           raise ValueError('Destionation not in Board')
         if self.in_board(x_start, y_start) is False:
@@ -45,7 +46,7 @@ class Chess():
         if (x_dest,y_dest) not in self._field[x_start][y_start].available_moves(x_start, y_start):
           raise ValueError('Not an available move')
         
-            
+        #move figure
         figure_to_move = self._field[x_start][y_start]
         self._field[x_start][y_start] = 0
         self._field[x_dest][y_dest] = figure_to_move
