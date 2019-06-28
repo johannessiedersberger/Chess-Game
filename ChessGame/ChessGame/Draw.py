@@ -50,6 +50,6 @@ def show_moves(game: Chess, x, y):
 empty_field = '♋'
 
 
-white_pieces = {Pawn: '♙',  Rook : '♖', Queen: '♕', King : "♔"}
-black_pieces = {Pawn: '♟',  Rook : '♜', Queen: '♛', King : "♚"}
+white_pieces = {Pawn : "♙", Rook : "♖", Knight : "♘", Bishop : "♗", King : "♔", Queen : "♕"}
+black_pieces = {Pawn : "♟", Rook : "♜", Knight : "♞", Bishop : "♝", King : "♚", Queen : "♛"}
 

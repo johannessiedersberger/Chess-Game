@@ -14,44 +14,25 @@ class FieldState(Enum):
 
 class Chess():
 
-    #initialization
+    
     def __init__(self):
+        #create the field
         self._field = [[0 for x in range(8)] for y in range(8)]
         self._place_piece()
     
 
     def _place_piece(self):
-      self._place_pawns()
-      self._place_rooks()
-      self._place_queens()
-      self._place_kings()
-
-    def _place_pawns(self):
-        for i in range(0,8):
+      #place pawns
+      for i in range(0,8):
             self._field[i][1] = Pawn(Color.BLACK, self)
             self._field[i][6] = Pawn(Color.WHITE, self)
-            
-    def _place_rooks(self):
-      for y in range(len(self._field)):
-            for x in range(len(self._field)):
-              if y == 0 and (x == 0 or x == 7):
-                self._field[x][y] = Rook(Color.BLACK, self)
-              if y == 7 and (x == 0 or x == 7):
-                self._field[x][y] = Rook(Color.WHITE, self)
+      #place the rest
+      placers = [Rook,Knight,Bishop,Queen,King,Bishop,Knight,Rook]
 
-    def _place_queens(self):
-      for y in range(len(self._field)):
-            for x in range(len(self._field)):
-              if y == 0 and x == 3:
-                self._field[x][y] = Queen(Color.BLACK, self)
-              if y == 7 and x == 3:
-                self._field[x][y] = Queen(Color.WHITE, self)
-
-    def _place_kings(self):
-      self._field[4][0] = King(Color.BLACK, self)
-      self._field[4][7] = King(Color.WHITE, self)
-
-
+      for i in range(0,8):
+            self._field[i][0] = placers[i](Color.BLACK, self)
+            self._field[i][7] = placers[i](Color.WHITE, self)
+      
     def move(self, x_start,y_start,x_dest,y_dest):
         if self.in_board(x_dest, y_dest) is False:
           raise ValueError('Destionation not in Board')
@@ -173,5 +154,16 @@ class King(Piece):
       return [(x_dest,y_dest) for x_dest,y_dest in kingList(x_start,y_start) if self.valid_turn(x_start,y_start,x_dest,y_dest)]
     def kingList(x,y):
       return [(x+1,y),(x+1,y+1),(x+1,y-1),(x,y+1),(x,y-1),(x-1,y),(x-1,y+1),(x-1,y-1)]
+
+class Bishop(Piece):
+    def available_moves(self, x, y):
+      moves = []
+      return moves
+
+class Knight(Piece):
+    def available_moves(self, x, y):
+      moves = []
+      return moves
+
     
     
