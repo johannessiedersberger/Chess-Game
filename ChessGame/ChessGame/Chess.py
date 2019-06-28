@@ -157,7 +157,7 @@ class King(Piece):
 
 class Bishop(Piece):
     def available_moves(self, x, y):
-      moves = []
+      moves = self.get_way(x, y, self.diagonal_directions)
       return moves
 
 class Knight(Piece):
