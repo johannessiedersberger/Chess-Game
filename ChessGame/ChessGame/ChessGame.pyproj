@@ -28,6 +28,9 @@
     <Compile Include="Draw.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="__main__.py" />
   </ItemGroup>
   <ItemGroup>

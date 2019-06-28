@@ -1,4 +1,5 @@
 from enum import Enum
+import doctest
 
 
 class Color(Enum):
@@ -19,10 +20,15 @@ class Chess:
         
 
     def _place_piece(self):
-        for i in range(0,8):
-            self._field[i][1] = Pawn(Color.WHITE, self)
-            self._field[i][6] = Pawn(Color.WHITE, self)
+      self._place_pawns()
+      self._place_rooks()
+      self._place_queens()
 
+    def _place_pawns(self):
+        for i in range(0,8):
+            self._field[i][1] = Pawn(Color.BLACK, self)
+            self._field[i][6] = Pawn(Color.WHITE, self)
+            
     def _place_rooks(self):
       for y in range(len(self._field)):
             for x in range(len(self._field)):
@@ -139,6 +145,7 @@ class Pawn(Piece):
             return -1
         else:  
             return 1
+
     def first_turn(self, x_start, y_start):
       if y_start == 1 or y_start == 6:
         return True
@@ -146,7 +153,6 @@ class Pawn(Piece):
         return False
 
 class Rook(Piece):
-
   def available_moves(self, x, y):
     moves = self.get_way(x,y,self.straigt_directions)
     return moves
