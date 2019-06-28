@@ -12,12 +12,13 @@ class FieldState(Enum):
     EMTPTY = 2
 
 
-class Chess:
+class Chess():
 
+    #initialization
     def __init__(self):
         self._field = [[0 for x in range(8)] for y in range(8)]
         self._place_piece()
-        
+    
 
     def _place_piece(self):
       self._place_pawns()
