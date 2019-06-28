@@ -24,6 +24,7 @@ class Chess():
       self._place_pawns()
       self._place_rooks()
       self._place_queens()
+      self._place_kings()
 
     def _place_pawns(self):
         for i in range(0,8):
@@ -45,6 +46,10 @@ class Chess():
                 self._field[x][y] = Queen(Color.BLACK, self)
               if y == 7 and x == 3:
                 self._field[x][y] = Queen(Color.WHITE, self)
+
+    def _place_kings(self):
+      self._field[4][0] = King(Color.BLACK, self)
+      self._field[4][7] = King(Color.WHITE, self)
 
 
     def move(self, x_start,y_start,x_dest,y_dest):

@@ -3,5 +3,5 @@ from Draw import *
 
 game = Chess()
 draw_field(game)
-show_moves(game, 0,1)
+show_moves(game, 3,0)
 
